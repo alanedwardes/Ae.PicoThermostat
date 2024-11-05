@@ -62,7 +62,7 @@ thermostat = dict(
 )
 
 clock = dict(
-    endpoint = "<time http endpoint>",
+    endpoint = "ntp://pool.ntp.org",
     update_time_ms = 300_000
 )
 ```
