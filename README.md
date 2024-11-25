@@ -44,7 +44,7 @@ hass = dict(
 )
 
 thermostat = dict(
-    rotate = 0, # Rotate the display by this many degrees
+    rotate = False, # Whether to rotate the display by 180 degrees
     leds = (6, 7, 8), # (26, 27, 28) for the Display Pack 2.8"
     entity_id = "<entity id>", # The thermostat entity ID
     occupancy_entity_id = "<entity id>", # Optional, ID of occupancy sensor

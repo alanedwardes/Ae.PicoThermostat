@@ -15,17 +15,18 @@ from hassws import HassWs
 
 led = RGBLED(*config.thermostat['leds'])
 
-display = picographics.PicoGraphics(display=picographics.DISPLAY_PICO_DISPLAY_2, pen_type=picographics.PEN_P4, rotate=config.thermostat['rotate'])
+display = picographics.PicoGraphics(display=picographics.DISPLAY_PICO_DISPLAY_2, pen_type=picographics.PEN_P4, rotate=180 if config.thermostat['rotate'] else 0)
 
 nic = network.WLAN(network.STA_IF)
 
 wifi = WiFi(config.wifi['host'], config.wifi['ssid'], config.wifi['key'], nic)
 hass = HassWs(config.hass['ws'], config.hass['token'], nic)
 
-swa = machine.Pin(12, machine.Pin.IN, machine.Pin.PULL_UP)
-swb = machine.Pin(13, machine.Pin.IN, machine.Pin.PULL_UP)
-swx = machine.Pin(14, machine.Pin.IN, machine.Pin.PULL_UP)
-swy = machine.Pin(15, machine.Pin.IN, machine.Pin.PULL_UP)
+pins = [15, 14, 13, 12] if config.thermostat['rotate'] else [12, 13, 14, 15]
+swa = machine.Pin(pins[0], machine.Pin.IN, machine.Pin.PULL_UP)
+swb = machine.Pin(pins[1], machine.Pin.IN, machine.Pin.PULL_UP)
+swx = machine.Pin(pins[2], machine.Pin.IN, machine.Pin.PULL_UP)
+swy = machine.Pin(pins[3], machine.Pin.IN, machine.Pin.PULL_UP)
 
 buttons = Buttons()
 
